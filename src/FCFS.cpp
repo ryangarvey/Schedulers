@@ -1,12 +1,12 @@
-#include "Scheduler.h"
-#include "ProcessSorts.h"
+#include "headers/Scheduler.h"
+#include "headers/ProcessSorts.h"
 #include <vector>
 #include <queue>
 #include <iostream>
 #include <algorithm>
 using namespace std;
 
-void FirstComeFirstServed(vector<CustomProcess>& procs) {
+void FirstComeFirstServed(vector<Process>& procs) {
     Scheduler schedule;
     sort(procs.begin(), procs.end(), sortByArrival);
     int currTime = procs[0].arrival;
@@ -25,10 +25,10 @@ void FirstComeFirstServed(vector<CustomProcess>& procs) {
 }
 
 int main() {
-    CustomProcess * a = new CustomProcess(1, 4);
-    CustomProcess * b = new CustomProcess(4, 6);
-    CustomProcess * c = new CustomProcess(7, 2);  
-    vector<CustomProcess> prc {*a,*b,*c};
+    Process * a = new Process(1, 4);
+    Process * b = new Process(4, 6);
+    Process * c = new Process(7, 2);  
+    vector<Process> prc {*a,*b,*c};
 
     FirstComeFirstServed(prc);
 }
