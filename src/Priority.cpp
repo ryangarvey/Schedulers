@@ -1,5 +1,5 @@
-#include "headers/Scheduler.h"
-#include "headers/ProcessSorts.h"
+#include "Scheduler.h"
+#include "ProcessSorts.h"
 #include <vector>
 #include <queue>
 #include <iostream>

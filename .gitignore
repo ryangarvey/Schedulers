@@ -1,3 +1,5 @@
 Schedulers.code-workspace
 /.vscode
 *.exe
+/build
+/bin
