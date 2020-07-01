@@ -6,7 +6,7 @@ using namespace std;
 class Scheduler {
 public:
     vector<Process> procs;
-    vector<int> startTimes, burstTimes;
+    vector<int> startTimes, burstTimes, arrivalTimes, endTimes;
 
     Scheduler() {};
     
@@ -16,16 +16,21 @@ public:
         procs.push_back(proc);
         startTimes.push_back(time);
         burstTimes.push_back(proc.burst);
+        arrivalTimes.push_back(proc.arrival);
     }
     
     void add(Process proc, int time, int burst) { 
         procs.push_back(proc);
         startTimes.push_back(time);
         burstTimes.push_back(burst);
+        arrivalTimes.push_back(proc.arrival);
     }
 
     int calculateTotalTurnaround() {
-
+        int total = 0;
+        for (int i = 0; i < startTimes.size(); ++i) {
+            total += startTimes[i] + burstTimes[i];
+        }
     }
 
     int calculateTotalWait() {
