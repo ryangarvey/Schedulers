@@ -4,5 +4,5 @@ bool sortByArrival(Process a, Process b) {
 }
 
 bool sortByBurst(Process a, Process b) {
-    return (b.burst <= a.burst);
+    return (b.burst > a.burst);
 }

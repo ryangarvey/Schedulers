@@ -29,31 +29,48 @@ void ShortestJobFirst(vector<Process>& procs) {
 
     for (int i = 1; i < procs.size(); ++i) {
         sort(toExecute.begin(), toExecute.end(), sortByBurst);
-        if (procs[i].arrival < currTime) toExecute.emplace(toExecute.begin(), procs[i]);
-        else if (toExecute.size() < 1) {
-            schedule.add(procs[i], currTime);
-            currTime += procs[i].burst;
+        //if empty queue
+        if (toExecute.size() == 0) {
+            // push to queue
+            if (currTime > procs[i].arrival) {
+                toExecute.push_back(procs[i]);
+            // execute straight away
+            } else {
+                schedule.add(procs[i], currTime);
+                currTime += procs[i].burst;
+            }
+        // queue has elements
         } else {
-            schedule.add(toExecute.back(), currTime);
-            currTime += toExecute.back().burst;
-            toExecute.pop_back();
+            // push to queue
+            if (currTime > procs[i].arrival) {
+                toExecute.push_back(procs[i]);
+            // execute front of element, push current element to queue
+            } else {
+                schedule.add(toExecute.front(), currTime);
+                currTime += toExecute.front().burst;
+                toExecute.erase(toExecute.begin());
+
+                toExecute.push_back(procs[i]);
+            }
         }
     }
     
     while(toExecute.size() > 0) {
-        schedule.add(toExecute.back(), currTime);
-        currTime += toExecute.back().burst;
-        toExecute.pop_back();
+        schedule.add(toExecute.front(), currTime);
+        currTime += toExecute.front().burst;
+        toExecute.erase(toExecute.begin());
     }
 
     schedule.printSchedule();
 }
 
 int main() {
-    Process * a = new Process(1, 4);
-    Process * b = new Process(4, 6);
-    Process * c = new Process(7, 2);  
-    vector<Process> prc {*a,*b,*c};
+    Process a("A", 1, 10);
+    Process b("B", 4, 6);
+    Process c("C", 7, 2);  
+    Process d("D", 9, 7);  
+    Process e("E", 12, 4);  
+    vector<Process> prc {a,b,c,d,e};
 
     ShortestJobFirst(prc);
 }

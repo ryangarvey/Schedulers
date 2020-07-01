@@ -25,9 +25,9 @@ void FirstComeFirstServed(vector<Process>& procs) {
 }
 
 int main() {
-    Process * a = new Process(1, 4);
-    Process * b = new Process(4, 6);
-    Process * c = new Process(7, 2);  
+    Process * a = new Process("A", 1, 4);
+    Process * b = new Process("B", 4, 6);
+    Process * c = new Process("C", 7, 2);  
     vector<Process> prc {*a,*b,*c};
 
     FirstComeFirstServed(prc);
